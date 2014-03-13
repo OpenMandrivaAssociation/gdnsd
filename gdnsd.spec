@@ -1,6 +1,6 @@
 Name: gdnsd
-Version: 1.10.1
-Release: 5
+Version: 1.11.2
+Release: 1
 Source0: http://downloads.gdnsd.org/%{name}-%{version}.tar.xz
 Source1: gdnsd.service
 Summary: Authoritative-only DNS server with failover support
@@ -38,6 +38,8 @@ from intermediate shared caches.
 
 %prep
 %setup -q
+aclocal
+automake -a
 %configure --with-rundir=/run
 
 %build
@@ -60,6 +62,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/gdnsd/zones
 %{_bindir}/gdnsd_geoip_test
 %{_sbindir}/gdnsd
 %{_libdir}/gdnsd
+%{_libexecdir}/gdnsd
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 %{_mandir}/man8/*
