@@ -1,6 +1,6 @@
 Name: gdnsd
 Version: 1.11.2
-Release: 1
+Release: 2
 Source0: http://downloads.gdnsd.org/%{name}-%{version}.tar.xz
 Source1: gdnsd.service
 Summary: Authoritative-only DNS server with failover support
