@@ -1,3 +1,5 @@
+%define _disable_ld_no_undefined 1
+
 Name: gdnsd
 Version: 1.11.2
 Release: 4
