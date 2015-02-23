@@ -1,9 +1,9 @@
 %define _disable_ld_no_undefined 1
 
 Name: gdnsd
-Version: 1.11.2
-Release: 4
-Source0: http://downloads.gdnsd.org/%{name}-%{version}.tar.xz
+Version: 2.2.0
+Release: 1
+Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1: gdnsd.service
 Summary: Authoritative-only DNS server with failover support
 URL: http://gdnsd.org/
