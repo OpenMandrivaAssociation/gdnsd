@@ -2,9 +2,12 @@
 
 Name: gdnsd
 Version: 2.2.0
-Release: 1
+Release: 2
 Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1: gdnsd.service
+# Fix startup if the build machine has F_OFD_SETLK, but
+# the target machine doesn't (e.g. running a kernel < 3.14)
+Patch0: gdnsd-2.2.0-fix-running-on-older-kernels.patch
 Summary: Authoritative-only DNS server with failover support
 URL: http://gdnsd.org/
 License: GPLv3+
@@ -40,6 +43,7 @@ from intermediate shared caches.
 
 %prep
 %setup -q
+%apply_patches
 aclocal
 automake -a
 %configure --with-rundir=/run

@@ -1,0 +1,17 @@
+--- gdnsd-2.2.0/libgdnsd/file.c.omv~	2015-05-21 14:56:09.692417545 +0200
++++ gdnsd-2.2.0/libgdnsd/file.c	2015-05-21 14:57:15.584933360 +0200
+@@ -66,9 +66,11 @@ gdnsd_fmap_t* gdnsd_fmap_new(const char*
+     locker.l_type = F_RDLCK;
+     locker.l_whence = SEEK_SET;
+     if(fcntl(fd, F_OFD_SETLK, &locker)) {
+-        dmn_log_err("Cannot get readlock on '%s': %s", fn, dmn_logf_errno());
+-        close(fd);
+-        return NULL;
++        if(fcntl(fd, F_SETLK, &locker)) {
++            dmn_log_err("Cannot get readlock on '%s': %s", fn, dmn_logf_errno());
++            close(fd);
++            return NULL;
++        }
+     }
+ 
+     struct stat st;
