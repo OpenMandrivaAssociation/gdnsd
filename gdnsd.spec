@@ -2,7 +2,7 @@
 
 Name: gdnsd
 Version: 2.2.0
-Release: 2
+Release: 3
 Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1: gdnsd.service
 # Fix startup if the build machine has F_OFD_SETLK, but
