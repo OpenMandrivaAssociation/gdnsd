@@ -1,10 +1,9 @@
 %define _disable_ld_no_undefined 1
 
 Name: gdnsd
-Version: 2.2.0
-Release: 3
+Version: 2.2.1
+Release: 1
 Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
-Source1: gdnsd.service
 # Fix startup if the build machine has F_OFD_SETLK, but
 # the target machine doesn't (e.g. running a kernel < 3.14)
 Patch0: gdnsd-2.2.0-fix-running-on-older-kernels.patch
@@ -46,16 +45,13 @@ from intermediate shared caches.
 %apply_patches
 aclocal
 automake -a
-%configure --with-rundir=/run
+%configure --with-rundir=/run --with-systemdsystemunitdir=/lib/systemd/system
 
 %build
 %make
 
 %install
 %makeinstall_std
-
-mkdir -p %{buildroot}/lib/systemd/system/
-install -c -m 644 %{SOURCE1} %{buildroot}/lib/systemd/system/
 
 # Not sure we want a -devel package here...
 # Seems fairly pointless if we don't package
