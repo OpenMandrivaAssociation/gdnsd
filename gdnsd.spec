@@ -1,7 +1,7 @@
 %define _disable_ld_no_undefined 1
 
 Name: gdnsd
-Version: 2.2.4
+Version: 2.4.0
 Release: 1
 Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Summary: Authoritative-only DNS server with failover support
@@ -12,13 +12,6 @@ BuildRequires: pkgconfig(libev) >= 4.0
 BuildRequires: pkgconfig(liburcu)
 BuildRequires: cap-devel
 BuildRequires: ragel >= 6.0
-
-%track
-prog %{name} = {
-	url = http://downloads.gdnsd.org/
-	regex = %{name}-(__VER__)\.tar\.xz
-	version = %{version}
-}
 
 %description
 gdnsd is an Authoritative-only DNS server which does geographic (or other
