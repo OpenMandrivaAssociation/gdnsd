@@ -2,7 +2,7 @@
 
 Name: gdnsd
 Version: 2.4.0
-Release: 1
+Release: 2
 Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Summary: Authoritative-only DNS server with failover support
 URL: http://gdnsd.org/
