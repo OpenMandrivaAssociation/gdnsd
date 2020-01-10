@@ -32,7 +32,7 @@ from intermediate shared caches.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 aclocal
 automake -a
 %configure --with-rundir=/run --with-systemdsystemunitdir=/lib/systemd/system
