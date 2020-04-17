@@ -1,9 +1,10 @@
 %define _disable_ld_no_undefined 1
 
 Name: gdnsd
-Version: 2.4.0
-Release: 2
+Version: 3.2.2
+Release: 1
 Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
+Patch0: gdnsd-3.2.2-compile.patch
 Summary: Authoritative-only DNS server with failover support
 URL: http://gdnsd.org/
 License: GPLv3+
@@ -31,8 +32,7 @@ Subnet draft for receiving more-precise network location information
 from intermediate shared caches.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 aclocal
 automake -a
 %configure --with-rundir=/run --with-systemdsystemunitdir=/lib/systemd/system
@@ -52,8 +52,8 @@ mkdir -p %{buildroot}%{_sysconfdir}/gdnsd/zones
 
 %files
 %{_bindir}/gdnsd_geoip_test
+%{_bindir}/gdnsdctl
 %{_sbindir}/gdnsd
-%{_libdir}/gdnsd
 %{_libexecdir}/gdnsd
 %{_mandir}/man1/*
 %{_mandir}/man5/*

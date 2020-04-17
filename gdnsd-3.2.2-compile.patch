@@ -1,0 +1,12 @@
+diff -up gdnsd-3.2.2/Makefile.am.omv~ gdnsd-3.2.2/Makefile.am
+--- gdnsd-3.2.2/Makefile.am.omv~	2020-04-17 20:08:47.407938837 +0200
++++ gdnsd-3.2.2/Makefile.am	2020-04-17 20:08:56.519988199 +0200
+@@ -3,7 +3,7 @@
+ #=====================================
+ 
+ # Common header path for libgdnsd's public gdnsd/*.h
+-AM_CPPFLAGS = -I$(srcdir)/include
++AM_CPPFLAGS = -I$(srcdir)/include -I/usr/include/libev
+ 
+ # Subdirectories to recurse into
+ #  ("." first so testsuite stuff always after main stuff)
