@@ -13,6 +13,8 @@ BuildRequires: pkgconfig(libev) >= 4.0
 BuildRequires: pkgconfig(liburcu)
 BuildRequires: cap-devel
 BuildRequires: ragel >= 6.0
+BuildRequires: rpm-helper
+Requires(pre,post): rpm-helper
 
 %description
 gdnsd is an Authoritative-only DNS server which does geographic (or other
