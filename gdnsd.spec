@@ -11,6 +11,7 @@ License: GPLv3+
 Group: System/Servers
 BuildRequires: pkgconfig(libev) >= 4.0
 BuildRequires: pkgconfig(liburcu)
+BuildRequires: pkgconfig(libsodium)
 BuildRequires: cap-devel
 BuildRequires: ragel >= 6.0
 BuildRequires: rpm-helper
