@@ -1,21 +1,24 @@
 %define _disable_ld_no_undefined 1
 
-Name: gdnsd
-Version: 3.5.0
+Summary:	Authoritative-only DNS server with failover support
+Name:		gdnsd
+Version:	3.8.0
 Release:	1
-Source0: https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
-Patch0: gdnsd-3.2.2-compile.patch
-Summary: Authoritative-only DNS server with failover support
-URL: http://gdnsd.org/
-License: GPLv3+
-Group: System/Servers
-BuildRequires: pkgconfig(libev) >= 4.0
-BuildRequires: pkgconfig(liburcu)
-BuildRequires: pkgconfig(libsodium)
-BuildRequires: cap-devel
-BuildRequires: ragel >= 6.0
-BuildRequires: rpm-helper
-Requires(pre,post): rpm-helper
+License:	GPLv3+
+Group:		System/Servers
+URL:		http://gdnsd.org/
+Source0:	https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
+Source1:	%{name}.sysusers
+Patch0:		gdnsd-3.2.2-compile.patch
+
+BuildRequires:	pkgconfig(libev) >= 4.0
+BuildRequires:	pkgconfig(liburcu)
+BuildRequires:	pkgconfig(libsodium)
+BuildRequires:	cap-devel
+BuildRequires:	ragel >= 6.0
+BuildRequires:	systemd-rpm-macros
+Requires(pre):	systemd
+%systemd_requires
 
 %description
 gdnsd is an Authoritative-only DNS server which does geographic (or other
@@ -38,13 +41,18 @@ from intermediate shared caches.
 %autosetup -p1
 aclocal
 automake -a
-%configure --with-rundir=/run --with-systemdsystemunitdir=/lib/systemd/system
 
 %build
-%make
+%configure \
+	--with-rundir=%{_rundir} \
+	--with-systemdsystemunitdir=%{_unitdir}
+
+%make_build
 
 %install
-%makeinstall_std
+%make_install
+
+install -Dpm 644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 # Not sure we want a -devel package here...
 # Seems fairly pointless if we don't package
@@ -53,20 +61,18 @@ rm -rf %{buildroot}%{_includedir} %{buildroot}%{_mandir}/man3
 
 mkdir -p %{buildroot}%{_sysconfdir}/gdnsd/zones
 
+%pre
+%sysusers_create_package %{name} %{SOURCE6}
+
 %files
+%{_sysusersdir}/%{name}.conf
 %{_bindir}/gdnsd_geoip_test
 %{_bindir}/gdnsdctl
 %{_sbindir}/gdnsd
 %{_libexecdir}/gdnsd
-%{_mandir}/man1/*
-%{_mandir}/man5/*
-%{_mandir}/man8/*
+%doc %{_mandir}/man1/*
+%doc %{_mandir}/man5/*
+%doc %{_mandir}/man8/*
 %doc %{_docdir}/gdnsd
-/lib/systemd/system/gdnsd.service
+%{_unitdir}/gdnsd.service
 %{_sysconfdir}/gdnsd
-
-%pre
-%_pre_useradd gdnsd /run/gdnsd /sbin/nologin
-
-%postun
-%_postun_userdel gdnsd

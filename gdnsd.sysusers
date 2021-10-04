@@ -1,0 +1,2 @@
+g gdnsd -
+u gdnsd - "gdnsd" /run/gdnsd /sbin/nologin
