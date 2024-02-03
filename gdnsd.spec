@@ -2,7 +2,7 @@
 
 Summary:	Authoritative-only DNS server with failover support
 Name:		gdnsd
-Version:	3.8.1
+Version:	3.8.2
 Release:	1
 License:	GPLv3+
 Group:		System/Servers
