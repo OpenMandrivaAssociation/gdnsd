@@ -6,7 +6,7 @@ Version:	3.8.2
 Release:	1
 License:	GPLv3+
 Group:		System/Servers
-URL:		http://gdnsd.org/
+URL:		https://gdnsd.org/
 Source0:	https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1:	%{name}.sysusers
 Patch0:		gdnsd-3.2.2-compile.patch
