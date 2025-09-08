@@ -3,7 +3,7 @@
 Summary:	Authoritative-only DNS server with failover support
 Name:		gdnsd
 Version:	3.8.3
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Servers
 URL:		https://gdnsd.org/
@@ -60,9 +60,7 @@ install -Dpm 644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 rm -rf %{buildroot}%{_includedir} %{buildroot}%{_mandir}/man3
 
 mkdir -p %{buildroot}%{_sysconfdir}/gdnsd/zones
-
-%pre
-%sysusers_create_package %{name} %{SOURCE6}
+mkdir -p %{buildroot}%{_var}/lib/gdnsd
 
 %files
 %{_sysusersdir}/%{name}.conf
@@ -76,3 +74,4 @@ mkdir -p %{buildroot}%{_sysconfdir}/gdnsd/zones
 %doc %{_docdir}/gdnsd
 %{_unitdir}/gdnsd.service
 %{_sysconfdir}/gdnsd
+%attr(0755,gdnsd,gdnsd) %{_var}/lib/gdnsd
