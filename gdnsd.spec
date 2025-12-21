@@ -11,6 +11,11 @@ Source0:	https://github.com/gdnsd/gdnsd/releases/download/v%{version}/%{name}-%{
 Source1:	%{name}.sysusers
 Patch0:		gdnsd-3.2.2-compile.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(libev) >= 4.0
 BuildRequires:	pkgconfig(liburcu)
 BuildRequires:	pkgconfig(libsodium)
